@@ -1,15 +1,21 @@
-import { Layout } from 'tdesign-react';
-const { Header, Content, Footer, Aside } = Layout;
+import { Layout, theme } from 'antd';
+import AsideMenus from './AsideMenus';
+const { Header, Content, Footer, Sider } = Layout;
 export default function BasicLayout() {
+  const {
+    token: { colorBgContainer }
+  } = theme.useToken();
   return (
     <>
-      <Layout className={'cz-h-full'}>
-        <Header>Header</Header>
+      <Layout className={'cz-size-full'}>
+        <Header style={{ background: colorBgContainer }}>header</Header>
         <Layout>
-          <Aside width={'80px'}>Aside</Aside>
+          <Sider theme={'light'}>
+            <AsideMenus></AsideMenus>
+          </Sider>
           <Layout>
-            <Content className={'cz-h-full'}>Content</Content>
-            <Footer>Copyright @ 2019-2021 Tencent. All Rights Reserved</Footer>
+            <Content>main content</Content>
+            <Footer>footer</Footer>
           </Layout>
         </Layout>
       </Layout>
