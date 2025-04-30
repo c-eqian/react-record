@@ -24,7 +24,7 @@ export default function Login() {
     console.log(e);
     if (e.validateResult === true) {
       //   跳转路由到首页
-      navigate('/home', { replace: true });
+      navigate('/dashboard', { replace: true });
     }
   };
   const onReset: FormProps['onReset'] = async e => {

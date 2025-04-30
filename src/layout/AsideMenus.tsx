@@ -1,10 +1,11 @@
 import { SettingOutlined } from '@ant-design/icons';
 import { Menu, type MenuProps } from 'antd';
+import { useNavigate } from 'react-router-dom';
 type MenuItem = Required<MenuProps>['items'][number];
 const menuList: MenuItem[] = [
   {
     label: '首页',
-    key: '/home',
+    key: '/dashboard',
     icon: <SettingOutlined />
   },
   {
@@ -47,11 +48,16 @@ const menuList: MenuItem[] = [
     key: '/log'
   }
 ];
+
 // 侧边栏菜单
 export default function AsideMenus() {
+  const navigate = useNavigate();
+  const handleClick: MenuProps['onClick'] = e => {
+    navigate(`${e.key}`);
+  };
   return (
     <>
-      <Menu mode="inline" items={menuList}></Menu>
+      <Menu onClick={handleClick} mode="inline" items={menuList}></Menu>
     </>
   );
 }
