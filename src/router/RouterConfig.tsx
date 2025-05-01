@@ -1,8 +1,21 @@
-import { lazy } from 'react';
-import { createBrowserRouter, Navigate } from 'react-router-dom';
-import BasicLayout from '../layout/BasicLayout.tsx'; // 少量公共样式
-import Login from '../login/Login';
-
+import { createBrowserRouter, Navigate } from 'react-router';
+import { NotFound } from '@/components/404/NotFound.tsx';
+import BasicLayout from '@/layout/BasicLayout'; // 少量公共样式
+import Login from '@/login/Login';
+import { menuList } from '@/router/configList';
+const createRouter = (menus: typeof menuList, list: any[] = []) => {
+  menus.forEach(item => {
+    if (item.children?.length) {
+      createRouter(item.children, list);
+    } else {
+      list.push({
+        path: item.key,
+        Component: item.component
+      });
+    }
+  });
+  return list;
+};
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -15,16 +28,11 @@ export const router = createBrowserRouter([
     element: <Login></Login>
   },
   {
+    path: '*',
+    element: <NotFound></NotFound>
+  },
+  {
     element: <BasicLayout></BasicLayout>,
-    children: [
-      {
-        path: '/dashboard',
-        Component: lazy(() => import('../views/home/Dashboard.tsx'))
-      },
-      {
-        path: '/article/list',
-        Component: lazy(() => import('../views/article/List.tsx'))
-      }
-    ]
+    children: createRouter(menuList)
   }
 ]);
