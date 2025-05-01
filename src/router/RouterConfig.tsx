@@ -3,13 +3,14 @@ import { NotFound } from '@/components/404/NotFound.tsx';
 import BasicLayout from '@/layout/BasicLayout'; // 少量公共样式
 import Login from '@/login/Login';
 import { menuList } from '@/router/configList';
-const createRouter = (menus: typeof menuList, list: any[] = []) => {
+const createRouter = (menus: typeof menuList, list: any[] = [], key: string = '') => {
   menus.forEach(item => {
+    const prefixKey = key + item.key;
     if (item.children?.length) {
-      createRouter(item.children, list);
+      createRouter(item.children, list, prefixKey);
     } else {
       list.push({
-        path: item.key,
+        path: prefixKey,
         Component: item.component
       });
     }

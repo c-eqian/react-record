@@ -16,13 +16,13 @@ export const menuList = [
       {
         label: '文章列表',
         icon: SettingOutlined,
-        key: '/article/list',
+        key: '/list',
         component: lazy(() => import('../views/article/List.tsx'))
       },
       {
         label: '发布文章',
         icon: SettingOutlined,
-        key: '/article/post',
+        key: '/post',
         component: lazy(() => import('../views/article/Post.tsx'))
       }
     ]
@@ -35,12 +35,12 @@ export const menuList = [
       {
         label: '笔记列表',
         icon: SettingOutlined,
-        key: '/notes/list'
+        key: '/list'
       },
       {
         label: '发布笔记',
         icon: SettingOutlined,
-        key: '/notes/post'
+        key: '/post'
       }
     ]
   },
