@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 import { Outlet } from 'react-router';
 import AsideMenus from './AsideMenus';
 import HeaderTop from './HeaderTop';
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Sider } = Layout;
 export default function BasicLayout() {
   const {
     token: { colorBgContainer }
@@ -24,7 +24,7 @@ export default function BasicLayout() {
                 <Outlet></Outlet>
               </Suspense>
             </Content>
-            <Footer>footer</Footer>
+            {/*<Footer>footer</Footer>*/}
           </Layout>
         </Layout>
       </Layout>
