@@ -1,7 +1,7 @@
 import { Space, Table, Tag, type TableProps } from 'antd';
 import { FormTable } from '@/components/form-table/FormTable.tsx';
 import EpForm from '@/components/form/Form.tsx';
-import type { FormType } from '@/components/form/types/formType.ts';
+import type { FormItems } from '@/components/form/types/formType.ts';
 type DataType = {
   key: string;
   name: string;
@@ -82,12 +82,15 @@ const data: DataType[] = [
     tags: ['cool', 'teacher']
   }
 ];
-const FormItems: FormType[] = [
+const formItems: FormItems[] = [
   {
     type: 'input',
     compProps: {
       value: 111,
       maxLength: 20
+    },
+    formItemProps: {
+      label: 'Name'
     }
   }
 ];
@@ -95,7 +98,7 @@ const Header = () => {
   return (
     <>
       <div>
-        <EpForm items={FormItems}></EpForm>
+        <EpForm items={formItems}></EpForm>
       </div>
     </>
   );
