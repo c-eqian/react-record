@@ -1,15 +1,13 @@
-import BasicLayout from './layout/BasicLayout.tsx'; // 少量公共样式
+import { ConfigProvider } from 'antd';
+import zhCN from 'antd/locale/zh_CN';
+import { RouterProvider } from 'react-router-dom';
+import { router } from '@/router/RouterConfig';
 function App() {
   return (
     <>
-      <div
-        style={{
-          width: '100%',
-          height: '100%'
-        }}
-      >
-        <BasicLayout></BasicLayout>
-      </div>
+      <ConfigProvider locale={zhCN}>
+        <RouterProvider router={router} />
+      </ConfigProvider>
     </>
   );
 }
