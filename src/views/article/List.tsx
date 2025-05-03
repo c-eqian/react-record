@@ -90,7 +90,41 @@ const formItems: FormItems[] = [
       maxLength: 20
     },
     formItemProps: {
-      label: 'Name'
+      label: 'Name',
+      name: 'input1'
+    }
+  },
+  {
+    type: 'input',
+    compProps: {
+      value: 111,
+      maxLength: 20
+    },
+    formItemProps: {
+      label: 'Name',
+      name: 'input2'
+    }
+  },
+  {
+    type: 'input',
+    compProps: {
+      value: 111,
+      maxLength: 20
+    },
+    formItemProps: {
+      label: 'Name',
+      name: 'input3'
+    }
+  },
+  {
+    type: 'input',
+    compProps: {
+      value: 111,
+      maxLength: 20
+    },
+    formItemProps: {
+      label: 'Name',
+      name: 'input4'
     }
   }
 ];

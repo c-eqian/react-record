@@ -1,6 +1,6 @@
 import type { PickComponentProps } from '@/types/typeUtils';
 import type { FormItemType } from './itemType';
-
+import type { FormItemProps } from 'antd';
 export type ComponentsTypeMap = {
   // eslint-disable-next-line @typescript-eslint/consistent-type-imports
   input: PickComponentProps<(typeof import('antd/es'))['Input']>;
@@ -9,7 +9,7 @@ export type ComponentsTypeMap = {
   // eslint-disable-next-line @typescript-eslint/consistent-type-imports
   form: PickComponentProps<(typeof import('antd/es'))['Form']>;
   // eslint-disable-next-line @typescript-eslint/consistent-type-imports
-  'form-item': PickComponentProps<(typeof import('antd/es'))['Form']['Item']>;
+  item: PickComponentProps<(typeof import('antd/es'))['Form']['Item']>;
 };
 export type GetComponentProps<P> = P extends keyof ComponentsTypeMap
   ? ComponentsTypeMap[P]
@@ -17,7 +17,7 @@ export type GetComponentProps<P> = P extends keyof ComponentsTypeMap
 export type FormItems = {
   type: FormItemType;
   compProps?: GetComponentProps<FormItems['type']>;
-  formItemProps?: GetComponentProps<'form-item'>;
+  formItemProps: FormItemProps;
 };
 
 export type FormType = {
@@ -26,4 +26,9 @@ export type FormType = {
    * @default []
    */
   items: FormItems[];
+  /**
+   * 列数
+   * @default 3
+   */
+  columns?: number;
 } & GetComponentProps<'form'>;
