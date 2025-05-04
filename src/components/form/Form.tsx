@@ -32,7 +32,7 @@ const RenderMoreButton = ({ itemCount, columns, rows, onClick }: any) => {
         variant="text"
         icon={needToggle ? <UpCircleOutlined /> : <DownCircleOutlined />}
       >
-        展开
+        {needToggle ? '收起' : '展开'}
       </Button>
     );
   }
