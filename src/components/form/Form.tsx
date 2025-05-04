@@ -39,7 +39,7 @@ const RenderMoreButton = ({ itemCount, columns, rows, onClick }: any) => {
   return null;
 };
 const formDefault = {
-  labelCol: { span: 4, offset: 0 }
+  labelCol: { span: 2, offset: 0 }
 };
 export default function EpForm({
   items,

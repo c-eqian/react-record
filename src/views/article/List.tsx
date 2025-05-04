@@ -89,38 +89,32 @@ const formItems: FormItems[] = [
       maxLength: 20
     },
     formItemProps: {
-      label: 'Name',
+      label: '标题：',
       name: 'input1'
     }
   },
   {
-    type: 'input',
+    type: 'select',
     compProps: {
-      maxLength: 20
+      maxLength: 20,
+      options: [
+        {
+          value: '前端',
+          label: '前端'
+        },
+        {
+          value: '后端',
+          label: '后端'
+        },
+        {
+          value: 'MySQL',
+          label: 'MySQL'
+        }
+      ]
     },
     formItemProps: {
-      label: 'Name',
+      label: '分类：',
       name: 'input2'
-    }
-  },
-  {
-    type: 'input',
-    compProps: {
-      maxLength: 20
-    },
-    formItemProps: {
-      label: 'Name',
-      name: 'input3'
-    }
-  },
-  {
-    type: 'input',
-    compProps: {
-      maxLength: 20
-    },
-    formItemProps: {
-      label: 'Name',
-      name: 'input4'
     }
   }
 ];
