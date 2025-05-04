@@ -20,7 +20,7 @@ export type FormItems = {
   formItemProps: FormItemProps;
 };
 
-export type FormType = {
+export type FormType<T = any> = {
   /**
    * 表单配置项
    * @default []
@@ -36,6 +36,16 @@ export type FormType = {
    * @default 3
    */
   columns?: number;
+  /**
+   * 搜索按钮点击，searchMode有效
+   * @param value
+   */
+  onConfirm?: (value: T) => void;
+  /**
+   * 重置按钮点击，searchMode有效
+   * @param value
+   */
+  onReset?: (value: T) => void;
   /**
    * 行数
    * @default 1

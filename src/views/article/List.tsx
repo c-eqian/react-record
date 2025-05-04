@@ -86,7 +86,6 @@ const formItems: FormItems[] = [
   {
     type: 'input',
     compProps: {
-      value: 111,
       maxLength: 20
     },
     formItemProps: {
@@ -97,7 +96,6 @@ const formItems: FormItems[] = [
   {
     type: 'input',
     compProps: {
-      value: 111,
       maxLength: 20
     },
     formItemProps: {
@@ -108,7 +106,6 @@ const formItems: FormItems[] = [
   {
     type: 'input',
     compProps: {
-      value: 111,
       maxLength: 20
     },
     formItemProps: {
@@ -119,7 +116,6 @@ const formItems: FormItems[] = [
   {
     type: 'input',
     compProps: {
-      value: 111,
       maxLength: 20
     },
     formItemProps: {
@@ -128,11 +124,14 @@ const formItems: FormItems[] = [
     }
   }
 ];
+const defaultValues = {
+  input1: 'initialValues'
+};
 const Header = () => {
   return (
     <>
       <div>
-        <EpForm searchMode items={formItems}></EpForm>
+        <EpForm initialValues={defaultValues} searchMode items={formItems}></EpForm>
       </div>
     </>
   );

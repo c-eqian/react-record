@@ -41,12 +41,21 @@ const RenderMoreButton = ({ itemCount, columns, rows, onClick }: any) => {
 const formDefault = {
   labelCol: { span: 4, offset: 0 }
 };
-export default function EpForm({ items, columns, searchMode, rows, ...reset }: FormType) {
+export default function EpForm({
+  items,
+  columns,
+  onConfirm,
+  onReset,
+  searchMode,
+  rows,
+  ...reset
+}: FormType) {
   const _columns = columns ?? 3;
   const _rows = rows ?? 1;
   const needIndex = _columns * _rows;
   const [needToggle, setNeedToggle] = useState(false);
   const [itemsIndex, setItemsIndex] = useState(needIndex);
+  const [form] = Form.useForm();
   if (!items || !items.length) return null;
   const cols = calcCols(_columns);
 
@@ -54,9 +63,18 @@ export default function EpForm({ items, columns, searchMode, rows, ...reset }: F
     setNeedToggle(!needToggle);
     setItemsIndex(!needToggle ? items.length : needIndex);
   };
+  const handleConfirmClick = (values: any) => {
+    console.log(values);
+    onConfirm?.(values);
+  };
+  const handleReset = () => {
+    form.resetFields();
+    console.log(form.getFieldsValue(true));
+    onReset?.(form.getFieldsValue(true));
+  };
   return (
     <>
-      <Form name="epForm" {...formDefault} {...reset}>
+      <Form form={form} onFinish={handleConfirmClick} name="epForm" {...formDefault} {...reset}>
         <Row className="cz-flex">
           {items.slice(0, itemsIndex).map(item => (
             <Col span={cols} key={item.formItemProps.name}>
@@ -65,10 +83,12 @@ export default function EpForm({ items, columns, searchMode, rows, ...reset }: F
           ))}
           {searchMode ? (
             <Col className={'cz-flex-1 cz-flex cz-gap-2 cz-justify-end'}>
-              <Button type={'primary'} icon={<SearchOutlined />}>
+              <Button htmlType="submit" type={'primary'} icon={<SearchOutlined />}>
                 搜索
               </Button>
-              <Button icon={<UndoOutlined />}>重置</Button>
+              <Button onClick={handleReset} icon={<UndoOutlined />}>
+                重置
+              </Button>
               <RenderMoreButton
                 onClick={handleToggle}
                 rows={_rows}
