@@ -27,8 +27,18 @@ export type FormType = {
    */
   items: FormItems[];
   /**
+   * 搜索模式
+   * @default false
+   */
+  searchMode?: boolean;
+  /**
    * 列数
    * @default 3
    */
   columns?: number;
+  /**
+   * 行数
+   * @default 1
+   */
+  rows?: number;
 } & GetComponentProps<'form'>;

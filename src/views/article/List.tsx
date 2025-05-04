@@ -132,7 +132,7 @@ const Header = () => {
   return (
     <>
       <div>
-        <EpForm items={formItems}></EpForm>
+        <EpForm searchMode items={formItems}></EpForm>
       </div>
     </>
   );
