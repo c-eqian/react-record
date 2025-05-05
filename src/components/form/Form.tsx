@@ -5,7 +5,7 @@ import {
   UpCircleOutlined
 } from '@ant-design/icons';
 import { Button, Col, Form, Row } from 'antd';
-import { useState } from 'react';
+import { forwardRef, useImperativeHandle, useState } from 'react';
 import { COMPONENTS_MAP } from '@/components/form/componentsMap.ts';
 import type { FormItems, FormType } from '@/components/form/types/formType.ts';
 const getComponent = (item: FormItems) => {
@@ -41,20 +41,19 @@ const RenderMoreButton = ({ itemCount, columns, rows, onClick }: any) => {
 const formDefault = {
   labelCol: { span: 2, offset: 0 }
 };
-export default function EpForm({
-  items,
-  columns,
-  onConfirm,
-  onReset,
-  searchMode,
-  rows,
-  ...reset
-}: FormType) {
+function EpForm(
+  { items, columns, onConfirm, onReset, searchMode, rows, children, ...reset }: FormType,
+  ref: any
+) {
   const _columns = columns ?? 3;
-  const _rows = rows ?? 1;
+  const _rows = searchMode ? (rows ?? 1) : items.length;
   const needIndex = _columns * _rows;
   const [needToggle, setNeedToggle] = useState(false);
   const [itemsIndex, setItemsIndex] = useState(needIndex);
+  useImperativeHandle(ref, () => ({
+    validateFields,
+    resetFields: () => handleReset()
+  }));
   const [form] = Form.useForm();
   if (!items || !items.length) return null;
   const cols = calcCols(_columns);
@@ -64,13 +63,16 @@ export default function EpForm({
     setItemsIndex(!needToggle ? items.length : needIndex);
   };
   const handleConfirmClick = (values: any) => {
-    console.log(values);
     onConfirm?.(values);
   };
   const handleReset = () => {
     form.resetFields();
-    console.log(form.getFieldsValue(true));
     onReset?.(form.getFieldsValue(true));
+  };
+  const validateFields = async () => {
+    const values = await form.validateFields();
+    handleConfirmClick(values);
+    return values;
   };
   return (
     <>
@@ -97,8 +99,10 @@ export default function EpForm({
               />
             </Col>
           ) : null}
+          {children ? <Col span={24}>{children}</Col> : null}
         </Row>
       </Form>
     </>
   );
 }
+export default forwardRef(EpForm);

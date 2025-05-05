@@ -46,6 +46,7 @@ export type FormType<T = any> = {
    * @param value
    */
   onReset?: (value: T) => void;
+  children?: any;
   /**
    * 行数
    * @default 1

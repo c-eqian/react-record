@@ -1,86 +1,62 @@
-import React, { useEffect } from 'react';
-
-import { useNavigate } from 'react-router-dom';
-import { DesktopIcon, LockOnIcon } from 'tdesign-icons-react';
-import {
-  Button,
-  Form,
-  Input,
-  MessagePlugin,
-  Space,
-  type FormInstanceFunctions,
-  type FormProps,
-  type FormRules
-} from 'tdesign-react';
-const { FormItem } = Form;
-interface ILoginData {
-  name: string;
-  password: string;
-}
-export default function Login() {
-  const navigate = useNavigate();
-  const onSubmit: FormProps['onSubmit'] = async e => {
-    await form.current?.validate();
-    console.log(e);
-    if (e.validateResult === true) {
-      //   跳转路由到首页
-      navigate('/dashboard', { replace: true });
+import { ArrowRightOutlined, UndoOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
+import { useRef } from 'react';
+import EpForm from '@/components/form/Form';
+import type { FormItems } from '@/components/form/types/formType';
+const loginForm: FormItems[] = [
+  {
+    type: 'input',
+    compProps: {
+      allowClear: true
+    },
+    formItemProps: {
+      label: '账号',
+      name: 'account',
+      rules: [{ required: true, message: '请输入账号' }]
     }
+  },
+  {
+    type: 'input',
+    compProps: {
+      allowClear: true
+    },
+    formItemProps: {
+      label: '密码',
+      name: 'password',
+      rules: [{ required: true, message: '请输入密码' }]
+    }
+  }
+];
+export default function Login() {
+  const formRef = useRef<any>();
+  const handleConfirm = (values: any) => {
+    console.log(values);
   };
-  const onReset: FormProps['onReset'] = async e => {
-    console.log(e);
-    await MessagePlugin.info('重置成功');
-  };
-  const rules: FormRules<ILoginData> = {
-    name: [{ required: true, message: '请输入口令', type: 'error' }],
-    password: [{ required: true, message: '请输入秘钥', type: 'error' }]
-  };
-  const form = React.useRef<FormInstanceFunctions>();
-  useEffect(() => {
-    form.current?.validate();
-  }, [form]);
   return (
     <>
       <div className={'cz-h-full cz-bg-[#e6effe] cz-flex cz-justify-center cz-items-center'}>
         <div
           className={
-            'cz-min-h-[300px] cz-p-5 cz-flex cz-justify-center cz-items-center cz-rounded-2xl cz-bg-white cz-w-[500px]'
+            'cz-min-h-[300px] cz-p-5 cz-flex cz-justify-center cz-items-center cz-rounded-2xl cz-bg-white cz-w-[380px]'
           }
         >
-          <Form
-            className={'cz-flex-1'}
-            labelAlign="right"
-            layout="vertical"
-            rules={rules}
-            preventSubmitDefault
-            resetType="empty"
-            requiredMark
-            onSubmit={onSubmit}
-            onReset={onReset}
-            showErrorMessage
+          <EpForm
+            ref={formRef}
+            labelCol={{ span: 6 }}
+            wrapperCol={{ span: 16 }}
+            onConfirm={handleConfirm}
+            columns={1}
+            items={loginForm}
           >
-            <FormItem initialData="admin" label="口令" name="name">
-              <Input clearable placeholder="请输入口令" prefixIcon={<DesktopIcon />} />
-            </FormItem>
-            <FormItem initialData="admin" label="秘钥" name="password">
-              <Input
-                clearable
-                type={'password'}
-                placeholder="请输入秘钥"
-                prefixIcon={<LockOnIcon />}
-              />
-            </FormItem>
-            <FormItem style={{ marginLeft: 150 }}>
-              <Space>
-                <Button type="submit" theme="primary">
-                  提交
-                </Button>
-                <Button type="reset" theme="default">
-                  重置
-                </Button>
-              </Space>
-            </FormItem>
-          </Form>
+            <div className={'cz-flex cz-justify-center cz-gap-12'}>
+              <Button htmlType={'submit'} type={'primary'} icon={<ArrowRightOutlined />}>
+                登录
+              </Button>
+              <Button onClick={() => formRef.current.resetFields()} icon={<UndoOutlined />}>
+                重置
+              </Button>
+            </div>
+          </EpForm>
         </div>
       </div>
     </>
