@@ -19,7 +19,6 @@ export type FormItems = {
   compProps?: GetComponentProps<FormItems['type']>;
   formItemProps: FormItemProps;
 };
-
 export type FormType<T = any> = {
   /**
    * 表单配置项
